@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://djmo3hr5b8skq"]
+
+[ext_resource type="Script" path="res://LoginRegister/box_container.gd" id="1_rvurl"]
+[ext_resource type="Script" path="res://modules/Websocket/websocket.gd" id="2_8syie"]
+
+[node name="main" type="Node2D"]
+
+[node name="BoxContainer" type="BoxContainer" parent="."]
+offset_right = 1281.0
+offset_bottom = 719.0
+alignment = 1
+vertical = true
+script = ExtResource("1_rvurl")
+
+[node name="Username" type="LineEdit" parent="BoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+placeholder_text = "Username"
+alignment = 1
+
+[node name="Password" type="LineEdit" parent="BoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+placeholder_text = "Password"
+alignment = 1
+
+[node name="Button" type="Button" parent="BoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Register/Login"
+
+[node name="WebSocket" type="Node" parent="."]
+script = ExtResource("2_8syie")
+
+[connection signal="message_received" from="WebSocket" to="BoxContainer" method="_on_web_socket_message_received"]
