@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmgnaerxipxud"]
+
+[ext_resource type="Script" path="res://scenes/CSS/CSS.gd" id="1_eamy2"]
+
+[node name="CSS" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_eamy2")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+offset_left = 520.0
+offset_top = 8.0
+offset_right = 633.0
+offset_bottom = 350.0
+
+[node name="BoxContainer" type="BoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+vertical = true

@@ -1,17 +1,15 @@
 extends Node
 
-enum MessageType {
-	NONE,
-	REGISTER_LOGIN,
-}
-
 @export var ip := "127.0.0.1:8080/websocket"
 
 signal message_received(message: Dictionary)
+signal connected
 
 var _webSocket := WebSocketPeer.new()
+var _isConnected := false
+var token := ""
 
-func send(type: MessageType, msg := {}) -> void:
+func send(type: String, msg := {}) -> void:
 	_webSocket.send_text(JSON.stringify(type))
 	_webSocket.send_text(JSON.stringify(msg))
 
@@ -28,6 +26,13 @@ func _process(delta: float) -> void:
 	var state := _webSocket.get_ready_state()
 	match state:
 		WebSocketPeer.STATE_OPEN:
+			if !_isConnected:
+				_isConnected = true
+				print("Websocket connected")
+				connected.emit()
 			_readPackets()
 		WebSocketPeer.STATE_CLOSED:
+			if _isConnected:
+				print("Websocket disconnected")
+			_isConnected = false
 			_webSocket.connect_to_url("ws://%s" % ip)

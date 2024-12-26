@@ -1,7 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://djmo3hr5b8skq"]
 
-[ext_resource type="PackedScene" uid="uid://trgd6y7xm1v8" path="res://LoginRegister/LoginRegister.tscn" id="1_oiqhl"]
+[ext_resource type="PackedScene" uid="uid://trgd6y7xm1v8" path="res://scenes/Login/Login.tscn" id="1_oiqhl"]
 
 [node name="main" type="Node2D"]
 
-[node name="BoxContainer" parent="." instance=ExtResource("1_oiqhl")]
+[node name="Login" parent="." instance=ExtResource("1_oiqhl")]
