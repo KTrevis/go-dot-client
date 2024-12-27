@@ -9,17 +9,22 @@ func submitForm() -> void:
 	WebSocket.send("LOGIN", data)
 	%Button.disabled = true
 
+func onMessage(msg := {}) -> void :
+	%Button.disabled = false
+	if "authenticated" in msg:
+		get_node("..").add_child(CSS.loadScene())
+		queue_free()
+		return
+
+	if "error" in msg:
+		%Error.text = msg.error
+
 func _ready() -> void:
 	var button: Button = %Button
+
+	%Username.grab_focus()
+	button.disabled = true
 	button.pressed.connect(submitForm)
-	WebSocket.message_received.connect(func(msg := {}) -> void:
-		%Button.disabled = false
-		if "token" in msg:
-			WebSocket.token = msg.token
-			print(msg)
-			queue_free()
-			get_node("..").add_child(CSS.new())
-			return
-		if "error" in msg:
-			%Error.text = msg.error
-	)
+	WebSocket.message_received.connect(onMessage)
+	WebSocket.connected.connect(func(): button.disabled = false)
+	WebSocket.disconnected.connect(func(): button.disabled = true)

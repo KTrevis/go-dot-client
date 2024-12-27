@@ -3,5 +3,5 @@ class_name CSS
 
 var test = "test"
 
-static func new() -> CSS:
+static func loadScene() -> CSS:
 	return load("res://scenes/CSS/CSS.tscn").instantiate()

@@ -4,14 +4,15 @@ extends Node
 
 signal message_received(message: Dictionary)
 signal connected
+signal disconnected
 
 var _webSocket := WebSocketPeer.new()
 var _isConnected := false
-var token := ""
 
 func send(type: String, msg := {}) -> void:
 	_webSocket.send_text(JSON.stringify(type))
-	_webSocket.send_text(JSON.stringify(msg))
+	if msg != {}:
+		_webSocket.send_text(JSON.stringify(msg))
 
 func _readPackets() -> void:
 	var message := _webSocket.get_packet().get_string_from_utf8()
@@ -34,5 +35,6 @@ func _process(delta: float) -> void:
 		WebSocketPeer.STATE_CLOSED:
 			if _isConnected:
 				print("Websocket disconnected")
+				disconnected.emit()
 			_isConnected = false
 			_webSocket.connect_to_url("ws://%s" % ip)
