@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://byfmneoxe1es"]
 
-[ext_resource type="Script" path="res://scenes/Player/player.gd" id="1_d855i"]
+[ext_resource type="Script" path="res://scenes/gameplay/Player/player.gd" id="1_d855i"]
 [ext_resource type="Texture2D" uid="uid://crrccbrqs2gc5" path="res://icon.svg" id="1_v6ul0"]
 [ext_resource type="Script" path="res://scenes/modules/StateMachine/StateMachine.gd" id="4_awoip"]
-[ext_resource type="Script" path="res://scenes/Player/states/default.gd" id="5_q6rfn"]
-[ext_resource type="Script" path="res://scenes/Player/states/walk.gd" id="6_2wik7"]
+[ext_resource type="Script" path="res://scenes/gameplay/Player/states/default.gd" id="5_q6rfn"]
+[ext_resource type="Script" path="res://scenes/gameplay/Player/states/walk.gd" id="6_2wik7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xdjf2"]
 size = Vector2(128, 128)

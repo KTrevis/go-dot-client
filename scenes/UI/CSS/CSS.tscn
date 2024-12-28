@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dmgnaerxipxud"]
 
-[ext_resource type="Script" path="res://scenes/CSS/CSS.gd" id="1_eamy2"]
-[ext_resource type="Script" path="res://scenes/CSS/create_character.gd" id="2_2aaha"]
+[ext_resource type="Script" path="res://scenes/UI/CSS/CSS.gd" id="1_eamy2"]
+[ext_resource type="Script" path="res://scenes/UI/CSS/create_character.gd" id="2_2aaha"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_82d4q"]
 bg_color = Color(0, 0, 0, 0.392157)
@@ -12,6 +12,7 @@ anchors_preset = 0
 script = ExtResource("1_eamy2")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 0
 offset_left = 479.0
 offset_top = 8.0
 offset_right = 633.0

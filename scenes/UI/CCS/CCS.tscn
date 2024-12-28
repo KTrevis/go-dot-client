@@ -1,0 +1,47 @@
+[gd_scene load_steps=2 format=3 uid="uid://c1upyxdkrmn85"]
+
+[ext_resource type="Script" path="res://scenes/UI/CCS/CCS.gd" id="1_yusub"]
+
+[node name="CCS" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yusub")
+
+[node name="FlowContainer" type="FlowContainer" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 22.0
+offset_right = 620.0
+offset_bottom = 267.0
+
+[node name="LineEdit" type="LineEdit" parent="."]
+layout_mode = 2
+offset_left = 236.0
+offset_top = 286.0
+offset_right = 370.0
+offset_bottom = 317.0
+placeholder_text = "Character name"
+
+[node name="CreateCharacter" type="Button" parent="."]
+layout_mode = 2
+offset_left = 234.0
+offset_top = 324.0
+offset_right = 372.0
+offset_bottom = 355.0
+text = "Create character"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 236.0
+offset_top = 264.0
+offset_right = 370.0
+offset_bottom = 287.0
+text = "Warrior"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="CreateCharacter" to="." method="_on_create_character_pressed"]
