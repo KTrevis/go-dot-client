@@ -1,6 +1,6 @@
 extends Node
 
-@export var ip := "127.0.0.1:8080/websocket"
+var ip := "127.0.0.1:8080/websocket"
 
 signal data_received(data: Dictionary)
 signal connected
@@ -28,6 +28,9 @@ func returnToLogin(error: String):
 	get_node("/root/main").add_child(loginScreen)
 
 func _ready() -> void:
+	#var host = JavaScriptBridge.eval("window.location.host")
+	#if host != null:
+		#ip = host + "/websocket"
 	_webSocket.connect_to_url("ws://%s" % ip)
 	disconnected.connect(returnToLogin)
 

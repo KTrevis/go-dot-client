@@ -3,7 +3,7 @@ extends Button
 var classList := {}
 
 func onPress() -> void:
-	WebSocket.send("GET_CLASSES")
+	WebSocket.send("GET_CLASS_LIST")
 
 func _ready() -> void:
 	WebSocket.data_received.connect(func(data := {}):
