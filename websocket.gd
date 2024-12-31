@@ -2,7 +2,7 @@ extends Node
 
 var ip := "127.0.0.1:8080/websocket"
 
-signal data_received(data: Dictionary)
+signal data_received(type: String, data: Dictionary)
 signal connected
 signal disconnected(data: Dictionary)
 
@@ -17,7 +17,10 @@ func send(type: String, msg := {}) -> void:
 func _readPackets() -> void:
 	var message := _webSocket.get_packet().get_string_from_utf8()
 	if message:
-		data_received.emit(JSON.parse_string(message))
+		var split := message.split("\r\n")
+		assert(split.size() == 2)
+		var dict: Dictionary = JSON.parse_string(split[1])
+		data_received.emit(split[0], dict)
 
 func returnToLogin(error: String):
 	var loginScreen := LoginScreen.loadScene()
@@ -28,9 +31,10 @@ func returnToLogin(error: String):
 	get_node("/root/main").add_child(loginScreen)
 
 func _ready() -> void:
-	#var host = JavaScriptBridge.eval("window.location.host")
-	#if host != null:
-		#ip = host + "/websocket"
+	var host = JavaScriptBridge.eval("window.location.host")
+	if host != null:
+		ip = host + "/websocket"
+
 	_webSocket.connect_to_url("ws://%s" % ip)
 	disconnected.connect(returnToLogin)
 

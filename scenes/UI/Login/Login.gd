@@ -14,7 +14,9 @@ func submitForm() -> void:
 	WebSocket.send("LOGIN", data)
 	%Button.disabled = true
 
-func onMessage(msg := {}) -> void :
+func onMessage(type: String, msg := {}) -> void :
+	if type != "LOGIN":
+		return
 	%Button.disabled = false
 	if "authenticated" in msg:
 		get_node("..").add_child(CSS.loadScene())
@@ -27,7 +29,7 @@ func onMessage(msg := {}) -> void :
 func onConnection(button: Button):
 	button.disabled = false
 
-func onDisconnection(button: Button):
+func onDisconnection(data: Dictionary, button: Button):
 	button.disabled = false
 
 func _ready() -> void:
