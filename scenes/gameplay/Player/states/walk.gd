@@ -17,4 +17,4 @@ func process(delta: float) -> void:
 	if player.global_position.distance_to(destination) <= 1:
 		player.velocity = Vector2.ZERO
 		player.global_position = destination
-		stateMachine.setState("default")
+		stateMachine.setState("default", {"move": true})
