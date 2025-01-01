@@ -29,7 +29,7 @@ func onMessage(type: String, msg := {}) -> void :
 func onConnection(button: Button):
 	button.disabled = false
 
-func onDisconnection(data: Dictionary, button: Button):
+func onDisconnection(error: String, button: Button):
 	button.disabled = false
 
 func _ready() -> void:

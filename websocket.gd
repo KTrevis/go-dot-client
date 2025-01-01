@@ -4,7 +4,7 @@ var ip := "127.0.0.1:8080/websocket"
 
 signal data_received(type: String, data: Dictionary)
 signal connected
-signal disconnected(data: Dictionary)
+signal disconnected(error: String)
 
 var _webSocket := WebSocketPeer.new()
 var _isConnected := false
@@ -41,6 +41,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	_webSocket.poll()
 	var state := _webSocket.get_ready_state()
+
 	match state:
 		WebSocketPeer.STATE_OPEN:
 			if !_isConnected:
@@ -53,7 +54,7 @@ func _process(delta: float) -> void:
 				print("Websocket disconnected")
 				var error := _webSocket.get_close_reason()
 				if _webSocket.get_close_code() == -1:
-					error = "server crashed"
+					error = "server shutdown"
 				disconnected.emit(error)
 			_isConnected = false
 			_webSocket.connect_to_url("ws://%s" % ip)

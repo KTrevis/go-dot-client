@@ -8,6 +8,7 @@ static func loadScene() -> CSS:
 
 func onCharacterClick(characterName: String):
 	%CharacterName.text = characterName
+	characterPicked = characterName
 
 func updateCharacterList(type := "", data := {}) -> void:
 	if type != "GET_CHARACTER_LIST":
@@ -15,10 +16,11 @@ func updateCharacterList(type := "", data := {}) -> void:
 	var characterList: Array = data.characterList
 
 	characterPicked = ""
+	%EnterWorld.disabled = true
 	if characterList.size() != 0:
+		%EnterWorld.disabled = false
 		characterPicked = characterList[0].Name
 	%CharacterName.text = characterPicked
-	%Play.disabled = false
 	for node: Node in %CharacterContainer.get_children():
 		node.queue_free()
 	for character in characterList:
@@ -28,6 +30,6 @@ func updateCharacterList(type := "", data := {}) -> void:
 		button.pressed.connect(onCharacterClick.bind(character.Name))
 
 func _ready() -> void:
-	%Play.grab_focus()
+	%EnterWorld.grab_focus()
 	WebSocket.data_received.connect(updateCharacterList)
 	WebSocket.send("GET_CHARACTER_LIST")

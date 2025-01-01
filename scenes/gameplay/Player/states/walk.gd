@@ -1,15 +1,26 @@
 extends State
 
 @onready var player: Player = stateMachine.get_node("..")
-var direction := Vector2.ZERO
+var destination := Vector2.ZERO
+
+func willCollide(direction: Vector2) -> bool:
+	var raycast := player.raycast
+	raycast.target_position = direction * 16
+	raycast.force_raycast_update()
+	return raycast.get_collider() != null
 
 func enter(msg := {}) -> void:
-	direction = msg.direction
+	destination = msg.destination
+	var direction := player.global_position.direction_to(destination)
+	if willCollide(direction):
+		stateMachine.setState("default")
+		return
 	player.velocity = direction * player.MOVEMENT_SPEED
 	if direction == Vector2.ZERO:
 		return stateMachine.setState("default")
 
 func process(delta: float) -> void:
-	var newDirection := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	if newDirection != direction:
-		stateMachine.setState("walk", {"direction": newDirection})
+	if player.global_position.distance_to(destination) <= 1:
+		player.velocity = Vector2.ZERO
+		player.global_position = destination
+		stateMachine.setState("default")

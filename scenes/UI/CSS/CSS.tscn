@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dmgnaerxipxud"]
+[gd_scene load_steps=6 format=3 uid="uid://dmgnaerxipxud"]
 
 [ext_resource type="Script" path="res://scenes/UI/CSS/CSS.gd" id="1_eamy2"]
 [ext_resource type="Script" path="res://scenes/UI/CSS/create_character.gd" id="2_2aaha"]
+[ext_resource type="Script" path="res://scenes/UI/CSS/enter_world.gd" id="2_faj7k"]
 [ext_resource type="Script" path="res://scenes/UI/CSS/delete_character.gd" id="3_y3sgu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_82d4q"]
@@ -48,12 +49,14 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Play" type="Button" parent="BoxContainer"]
+[node name="EnterWorld" type="Button" parent="BoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 disabled = true
-text = "Play"
+text = "Enter World
+"
+script = ExtResource("2_faj7k")
 
 [node name="ButtonContainer" type="BoxContainer" parent="."]
 layout_mode = 2
