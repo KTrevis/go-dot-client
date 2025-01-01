@@ -27,6 +27,7 @@ func onMessage(type: String, msg := {}) -> void :
 		%Error.text = msg.error
 
 func onConnection(button: Button):
+	%Error.text = "server up"
 	button.disabled = false
 
 func onDisconnection(error: String, button: Button):

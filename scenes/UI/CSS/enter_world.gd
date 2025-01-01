@@ -3,10 +3,10 @@ extends Button
 @onready var css: CSS = get_node("../..")
 
 func onPress() -> void:
-	WebSocket.send("GET_MAP", {"map": "test"})
+	WebSocket.send("ENTER_WORLD", {"character": css.characterPicked})
 
 func onMsg(msgType: String, data: Dictionary):
-	if msgType != "GET_MAP":
+	if msgType != "ENTER_WORLD":
 		return
 	var drawer := MapDrawer.loadScene()
 	drawer.drawMap(data.map)

@@ -54,7 +54,7 @@ func _process(delta: float) -> void:
 				print("Websocket disconnected")
 				var error := _webSocket.get_close_reason()
 				if _webSocket.get_close_code() == -1:
-					error = "server shutdown"
+					error = "server down"
 				disconnected.emit(error)
 			_isConnected = false
 			_webSocket.connect_to_url("ws://%s" % ip)
