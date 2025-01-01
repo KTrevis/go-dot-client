@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://byfmneoxe1es"]
+[gd_scene load_steps=8 format=3 uid="uid://byfmneoxe1es"]
 
 [ext_resource type="Script" path="res://scenes/gameplay/Player/player.gd" id="1_d855i"]
 [ext_resource type="Texture2D" uid="uid://crrccbrqs2gc5" path="res://icon.svg" id="1_v6ul0"]
@@ -6,19 +6,28 @@
 [ext_resource type="Script" path="res://scenes/gameplay/Player/states/default.gd" id="5_q6rfn"]
 [ext_resource type="Script" path="res://scenes/gameplay/Player/states/walk.gd" id="6_2wik7"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_43ng2"]
-radius = 5.38516
+[sub_resource type="AtlasTexture" id="AtlasTexture_0m02y"]
+atlas = ExtResource("1_v6ul0")
+region = Rect2(0, 0, 128, 128)
 
-[node name="player" type="CharacterBody2D"]
-collision_mask = 4
+[sub_resource type="SpriteFrames" id="SpriteFrames_txm0f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0m02y")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Player" type="Node2D"]
 script = ExtResource("1_d855i")
 
-[node name="Icon" type="Sprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.1, 0.1)
-texture = ExtResource("1_v6ul0")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_43ng2")
+sprite_frames = SubResource("SpriteFrames_txm0f")
+autoplay = "default"
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("4_awoip")
