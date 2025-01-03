@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dc10m7q3ufn4n"]
 
-[ext_resource type="Script" path="res://assets/tileset/tileset.gd" id="2_m7k0e"]
+[ext_resource type="Script" path="res://assets/tileset/MapDrawer.gd" id="2_m7k0e"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gl54g"]
 load_path = "res://.godot/imported/tileset.png-f15c48513938bb8c73d02c054f47e260.ctex"

@@ -12,7 +12,14 @@ func onMsg(msgType: String, data: Dictionary):
 	drawer.drawMap(data.map)
 	get_node("/root/main").add_child(drawer)
 	get_node("../..").queue_free()
-	drawer.add_child(Player.loadScene())
+	var player := Player.loadScene()
+	var position := Vector2(
+		data.character.Position.X,
+		data.character.Position.Y,
+	)
+	position = drawer.map_to_local(position)
+	player.position = position
+	drawer.add_child(player)
 
 func _ready() -> void:
 	WebSocket.data_received.connect(onMsg)

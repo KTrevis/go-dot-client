@@ -3,6 +3,7 @@ class_name Player
 
 @onready var raycast: RayCast2D = $RayCast2D
 @onready var stateMachine: StateMachine = $StateMachine
+var gridPos := Vector2i.ZERO
 
 static func loadScene() -> Player:
 	return preload("res://scenes/gameplay/Player/player.tscn").instantiate()

@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://byfmneoxe1es"]
+[gd_scene load_steps=9 format=3 uid="uid://byfmneoxe1es"]
 
 [ext_resource type="Script" path="res://scenes/gameplay/Player/player.gd" id="1_d855i"]
 [ext_resource type="Texture2D" uid="uid://crrccbrqs2gc5" path="res://icon.svg" id="1_v6ul0"]
 [ext_resource type="Script" path="res://scenes/modules/StateMachine/StateMachine.gd" id="4_awoip"]
 [ext_resource type="Script" path="res://scenes/gameplay/Player/states/default.gd" id="5_q6rfn"]
 [ext_resource type="Script" path="res://scenes/gameplay/Player/states/walk.gd" id="6_2wik7"]
+[ext_resource type="Script" path="res://scenes/gameplay/Player/UI/position.gd" id="6_l8ex1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0m02y"]
 atlas = ExtResource("1_v6ul0")
@@ -44,3 +45,14 @@ script = ExtResource("6_2wik7")
 enabled = false
 target_position = Vector2(0, 16)
 collision_mask = 4
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Position" type="Label" parent="UI"]
+offset_left = 6.0
+offset_top = 3.0
+offset_right = 46.0
+offset_bottom = 26.0
+script = ExtResource("6_l8ex1")
+
+[connection signal="player_moved" from="StateMachine/walk" to="UI/Position" method="_on_walk_player_moved"]
