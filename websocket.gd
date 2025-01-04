@@ -32,6 +32,7 @@ func returnToLogin(error: String):
 
 func _ready() -> void:
 	var host = JavaScriptBridge.eval("window.location.host")
+	_webSocket.inbound_buffer_size *= 10
 	if host != null:
 		ip = host + "/websocket"
 

@@ -166,6 +166,6 @@ physics_layer_0/collision_layer = 4
 physics_layer_0/collision_mask = 3
 sources/0 = SubResource("TileSetAtlasSource_yuqd1")
 
-[node name="TileMapLayer" type="TileMapLayer"]
+[node name="MapDrawer" type="TileMapLayer"]
 tile_set = SubResource("TileSet_pmb5y")
 script = ExtResource("2_m7k0e")

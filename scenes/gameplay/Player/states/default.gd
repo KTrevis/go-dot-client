@@ -15,21 +15,22 @@ func getDirection() -> Vector2i:
 	return Vector2i.ZERO
 
 func move() -> void:
-	var cellDest := tilemap.local_to_map(tilemap.to_local(player.global_position))
+	var gridPos := tilemap.local_to_map(tilemap.to_local(player.global_position))
 	var direction := getDirection()
-	cellDest += direction
+	gridPos += direction
 
 	if direction:
-		var destination := tilemap.map_to_local(cellDest)
+		var destination := tilemap.map_to_local(gridPos)
 		destination = tilemap.to_global(destination)
 		stateMachine.setState("walk", {
 			"destination": destination,
-			"cellDest": cellDest
 			})
 
 func enter(msg := {}) -> void:
-	if "move" in msg:
+	if "move" in msg and is_multiplayer_authority():
 		move()
 
 func physicsProcess(delta: float) -> void:
+	if !is_multiplayer_authority():
+		return
 	move()

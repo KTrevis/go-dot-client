@@ -13,9 +13,9 @@ func _ready() -> void:
 	$LineEdit.grab_focus()
 	WebSocket.data_received.connect(onDataReceived)
 	$ClassName.text = classesName[0]
-	for name in classesName:
+	for curr in classesName:
 		var button := Button.new()
-		button.text = name
+		button.text = curr
 		$FlowContainer.add_child(button)
 		button.pressed.connect(onClassPick.bind(button))
 

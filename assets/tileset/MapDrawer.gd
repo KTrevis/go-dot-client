@@ -18,11 +18,37 @@ func drawMap(map: Dictionary) -> void:
 		x = 0
 		y += 1
 
-func onMsg(type: String, data: Dictionary):
+func findPlayerWithName(characterName: String) -> Player:
+	var players := get_tree().get_nodes_in_group("player")
+	for player: Player in players:
+		if player.name == characterName:
+			return player
+	return null
+
+func movePlayer(data: Dictionary) -> void:
+	var playerLoaded := false
+	var character: Dictionary = data.character
+	var player := findPlayerWithName(character.Name)
+
+	if player != null:
+		var destination := map_to_local(Vector2i(
+			character.Position.X, character.Position.Y
+		))
+		return player.stateMachine.setState("walk", {"destination": destination})
+	var newPlayer := Player.loadScene()
+	var position := Vector2i(character.Position.X, character.Position.Y)
+	newPlayer.position = map_to_local(position)
+	newPlayer.name = character.Name
+	newPlayer.set_multiplayer_authority(0)
+	add_child(newPlayer)
+
+func onMsg(type: String, data: Dictionary) -> void:
+	if type == "MOVE_PLAYER":
+		return movePlayer(data)
 	if type != "SEND_MAP":
 		return
 	drawMap(data.map)
 
 func _ready() -> void:
 	WebSocket.data_received.connect(onMsg)
-	WebSocket.send("IN_GAME")
+	WebSocket.send("GET_CHUNKS")

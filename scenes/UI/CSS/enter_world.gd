@@ -13,12 +13,13 @@ func onMsg(msgType: String, data: Dictionary):
 	get_node("/root/main").add_child(drawer)
 	get_node("../..").queue_free()
 	var player := Player.loadScene()
-	var position := Vector2(
+	var playerPos := Vector2(
 		data.character.Position.X,
 		data.character.Position.Y,
 	)
-	position = drawer.map_to_local(position)
-	player.position = position
+	playerPos = drawer.map_to_local(playerPos)
+	player.position = playerPos
+	player.name = data.character.Name
 	drawer.add_child(player)
 
 func _ready() -> void:

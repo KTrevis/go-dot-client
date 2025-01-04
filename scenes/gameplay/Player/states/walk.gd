@@ -3,6 +3,7 @@ extends State
 signal player_moved(newPos: Vector2i)
 
 @onready var player: Player = stateMachine.get_node("..")
+@onready var tilemap: TileMapLayer = player.get_node("..")
 var tilesPerSecond: int = 5
 var destination := Vector2.ZERO
 var direction := Vector2.ZERO
@@ -21,13 +22,14 @@ func enter(msg := {}) -> void:
 	if player.willCollide(direction):
 		stateMachine.setState("default")
 		return
-	player.gridPos = msg.cellDest
+	player.gridPos = tilemap.local_to_map(tilemap.to_local(msg.destination))
 	player_moved.emit(player.gridPos)
-	sendPosToServer()
+	if is_multiplayer_authority():
+		sendPosToServer()
 
 func physicsProcess(delta: float) -> void:
-	tilesPerSecond = 5
-	player.position += direction * delta * (16 * tilesPerSecond)
+	var distance := delta * (16 * tilesPerSecond)
+	player.position += direction * distance
 
 func process(delta: float) -> void:
 	if player.global_position.distance_to(destination) <= 1:

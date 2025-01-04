@@ -3,6 +3,8 @@ class_name Player
 
 @onready var raycast: RayCast2D = $RayCast2D
 @onready var stateMachine: StateMachine = $StateMachine
+@onready var tilemap: MapDrawer = get_node("..")
+
 var gridPos := Vector2i.ZERO
 
 static func loadScene() -> Player:
